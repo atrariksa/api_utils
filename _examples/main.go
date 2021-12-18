@@ -4,13 +4,13 @@ import (
 	"log"
 	"net/http"
 
-	apiutils "github.com/atrariksa/api_utils"
+	"github.com/atrariksa/api_utils"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 )
 
 type ExampleXMLHandler struct {
-	apiutils.DefaultHttpHandler
+	api_utils.DefaultHttpHandler
 }
 
 func (xh *ExampleXMLHandler) Handle(w http.ResponseWriter, r *http.Request) {
@@ -28,10 +28,10 @@ func setupApis() http.Handler {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
-	dh := apiutils.GetDefaultHandler()
+	dh := api_utils.GetDefaultHandler()
 	xmlh := ExampleXMLHandler{}
 	xmlh.DefaultHttpHandler = dh
-	xmlh.IRespWriter = &apiutils.XmlRespWriter{}
+	xmlh.IRespWriter = &api_utils.XmlRespWriter{}
 
 	r.Get("/", dh.Handle)
 	r.Get("/xml", xmlh.Handle)

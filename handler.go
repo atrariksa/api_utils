@@ -20,6 +20,19 @@ type DefaultHttpHandler struct {
 	IRespWriter
 }
 
+/* Example Annotations
+// CreateUser example
+// @Summary Create new User
+// @Description Create new User
+// @ID create-user
+// @Accept  json
+// @Produce  json
+// @Param   models.CreateUserReq  body models.CreateUserReq true  "CreateUserReq"
+// @Success 201 {object} models.Response
+// @Failure 400 {object} models.Response
+// @Failure 409 {object} models.Response
+// @Router /user/ [post]
+*/
 func (dh DefaultHttpHandler) Handle(w http.ResponseWriter, r *http.Request) {
 	resp := dh.Process(r.Context(), nil)
 	dh.Write(w, 200, map[string]interface{}{"message": resp})
